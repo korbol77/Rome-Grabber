@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap");
+
+:root {
+  --main: #daa520;
+  --color1: #ca8a04;
+  --color2: #a16207;
+  --bg: #18181b;
+  --bg2: #3f3f46;
+  --text: #71717a;
+  --text2: #a1a1aa;
+}
+
+body {
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100svh;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Oswald", sans-serif;
+}
+
+input,
+button {
+  border: none;
+  border-radius: 0.25rem;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rome_title {
+  margin-bottom: 1rem;
+  color: var(--main);
+  text-align: center;
+}
+
+.rome_title p {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg2);
+  border-radius: 1rem;
+  font-size: 2rem;
+  margin: auto;
+  margin-bottom: 0.5rem;
+}
+
+.main_page::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/rome_bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  opacity: 0.1;
+  filter: blur(5px);
+}
+
+.form_panel label {
+  color: var(--text);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.form_panel input {
+  width: 100%;
+  margin-top: 0.25rem;
+  background-color: var(--bg2);
+  padding: 0.45rem 0.65rem;
+  color: var(--text2);
+  font-size: 0.95rem;
+}
+
+.form_panel input:focus {
+  outline: none;
+}
+
+.main_btn {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background-color: var(--color1);
+  transition: all 300ms;
+  color: var(--bg);
+}
+
+.main_btn:hover {
+  background-color: var(--color2);
+}
+
+.rome_link {
+  font-size: 0.85rem;
+  color: var(--text2);
+  max-width: 50ch;
+  word-break: break-all;
+  margin: auto;
+  text-align: center;
+}
+
+.rome_link:hover {
+  text-decoration: underline;
+}
