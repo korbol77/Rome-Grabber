@@ -10,6 +10,12 @@
   --text2: #a1a1aa;
 }
 
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Oswald", sans-serif;
+}
+
 body {
   background-color: var(--bg);
   display: flex;
@@ -17,12 +23,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 100svh;
-}
-
-* {
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Oswald", sans-serif;
 }
 
 input,
@@ -40,6 +40,18 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+footer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 15px;
+}
+
+footer i {
+  font-size: 1.75rem;
+  color: var(--text);
 }
 
 .rome_title {

