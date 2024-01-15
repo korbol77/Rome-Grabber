@@ -37,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
     <main class="main_page">
-        <div class="rome_title">
-            <p>🏛️</p>
+        <div class="rome_header">
+            <img src="./assets/img/rome_grabber_logo.png" alt="🏛️">
             <h1>Rome Grabber</h1>
         </div>
         <form action="./index.php" method="POST">

