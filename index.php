@@ -8,18 +8,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $website_url = $_POST["website_url"];
     $webhook_url = $_POST["webhook_url"];
 
-    if (empty(trim($website_url)) || empty(trim($webhook_url))) {
+    if (empty(trim($website_url)) || empty(trim($webhook_url)))
         $errors[] = "Fields can't be empty!";
-    } else {
-        if (str_starts_with($webhook_url, WEBHOOK_DEFAULT)) {
-            $default_page_url = "http://127.0.0.1/rome_grabber/"; // Your website URL
 
-            $b64_website_url = base64_encode($website_url);
-            $b64_webhook_url_short = base64_encode(explode(WEBHOOK_DEFAULT, $webhook_url)[1]);
-            $new_rome_url = $default_page_url . "redirect.php?id=$b64_webhook_url_short&target=$b64_website_url";
-        } else {
-            $errors[] = "You provided an incorrect webhook url format!";
-        }
+    if (!(filter_var($website_url, FILTER_VALIDATE_URL) && filter_var($webhook_url, FILTER_VALIDATE_URL)))
+        $errors[] = "Fields must be in valid url format!";
+
+    if (!str_starts_with($webhook_url, WEBHOOK_DEFAULT))
+        $errors[] = "You provided an incorrect webhook url format!";
+
+    if (empty($errors)) {
+        $default_page_url = "http://127.0.0.1/rome_grabber/"; // Your website URL
+
+        $b64_website_url = base64_encode($website_url);
+        $b64_webhook_url_short = base64_encode(explode(WEBHOOK_DEFAULT, $webhook_url)[1]);
+        $new_rome_url = $default_page_url . "redirect.php?id=$b64_webhook_url_short&target=$b64_website_url";
     }
 }
 ?>
@@ -31,15 +34,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rome Grabber - Home</title>
+    <link rel="icon" type="image/x-icon" href="./assets/icon.ico">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
-    <main class="main_page">
+    <main class="main_panel">
         <div class="rome_header">
             <img src="./assets/img/rome_grabber_logo.png" alt="🏛️">
-            <h1>Rome Grabber</h1>
+            <h1>Rome <span style="color: #d4d4d8;">Grabber</span></h1>
         </div>
         <form action="./index.php" method="POST">
             <div class="form_panel">

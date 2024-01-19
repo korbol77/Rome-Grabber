@@ -30,10 +30,27 @@ body {
   height: 100svh;
 }
 
+body::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/rome_bg.png");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  opacity: 0.1;
+  filter: blur(5px);
+}
+
 input,
 button {
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.35rem;
+  padding: 0.45rem 0.65rem;
 }
 
 h1 {
@@ -78,26 +95,19 @@ footer i {
   border-radius: 50%;
   margin: auto;
   margin-bottom: 0.75rem;
+  border: 5px dashed rgba(100, 100, 100, 0.25);
 }
 
-.main_page::before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("../img/rome_bg.png");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  z-index: -1;
-  opacity: 0.1;
-  filter: blur(5px);
+.main_panel {
+  background-color: rgba(100, 100, 100, 0.25);
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 1rem var(--bg2);
+  backdrop-filter: blur(3px);
 }
 
 .form_panel label {
-  color: var(--text);
+  color: var(--text2);
   font-size: 1.35rem;
   font-weight: 500;
 }
@@ -106,7 +116,6 @@ footer i {
   width: 100%;
   margin-top: 0.25rem;
   background-color: var(--bg2);
-  padding: 0.45rem 0.65rem;
   color: var(--text2);
   font-size: 0.95rem;
 }
@@ -117,8 +126,7 @@ footer i {
 
 .main_btn {
   cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 500;
   background-color: var(--color1);
   transition: all 300ms;
@@ -131,7 +139,7 @@ footer i {
 
 .rome_link {
   font-size: 0.85rem;
-  color: var(--text2);
+  color: var(--color2);
   max-width: 50ch;
   word-break: break-all;
   margin: auto;
